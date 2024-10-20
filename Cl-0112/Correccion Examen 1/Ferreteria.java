@@ -17,7 +17,7 @@ public class Ferreteria {
         Scanner scanner = new Scanner(System.in);
         double maxAncho = 4.0;
         double maxLargo = 6.0;
-
+    
         while (true) {
             System.out.println("\nMenú:");
             System.out.println("1) Vender a otro usuario");
@@ -26,7 +26,7 @@ public class Ferreteria {
             System.out.println("4) Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
-
+    
             switch (opcion) {
                 case 1:
                     venderTabla(maxAncho, maxLargo, scanner);
@@ -46,7 +46,7 @@ public class Ferreteria {
             }
         }
     }
-
+    
     private void venderTabla(double maxAncho, double maxLargo, Scanner scanner) {
         double ancho, largo;
     
@@ -67,10 +67,10 @@ public class Ferreteria {
         }
     
         // Intentar utilizar un residuo en lugar de crear una nueva tabla
-        int indexResiduo = encontrarResiduo(ancho, largo);
-        if (indexResiduo != -1) {
+        int i = encontrarResiduo(ancho, largo);
+        if (i != -1) {
             // Si se encuentra un residuo adecuado
-            Tabla tablaUsada = almacen.getTabla(indexResiduo);
+            Tabla tablaUsada = almacen.getTabla(i);
             System.out.println("Se utilizará el residuo: Ancho: " + tablaUsada.getAncho() + 
                                ", Largo: " + tablaUsada.getLargo());
             
@@ -87,12 +87,12 @@ public class Ferreteria {
                 double precioResiduo = areaResiduo * 1000; // Precio del residuo
                 Tabla nuevoResiduo = new Tabla(nuevoResiduoAncho, nuevoResiduoLargo);
                 System.out.println("Precio del nuevo residuo: " + precioResiduo);
-                almacen.setTabla(indexResiduo, nuevoResiduo); // Sobrescribir el residuo en el almacén
+                almacen.setTabla(i, nuevoResiduo); // Sobrescribir el residuo en el almacén
                 System.out.println("Se ha actualizado el residuo: Ancho: " + nuevoResiduo.getAncho() + 
                                    ", Largo: " + nuevoResiduo.getLargo());
             } else {
                 // Si no hay residuo, eliminar la tabla de residuos utilizada
-                almacen.eliminarTabla(indexResiduo);
+                almacen.eliminarTabla(i);
             }
         } else {
             // Crear tabla vendida si no hay residuos disponibles
@@ -175,4 +175,5 @@ public class Ferreteria {
         ferreteria.atenderClientes();
     }
 }
+
 
